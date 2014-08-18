@@ -7,6 +7,7 @@
 
 package core;
 
+
 import javax.swing.JPanel;
 
 /**
@@ -26,24 +27,22 @@ public class Display extends JPanel implements Runnable{
     public void run() {
         
         while(running){
-           render(); 
+           Main.m.render();
         }
     }
     
-    public void startGame(){
+    public synchronized void startGame(){
         running = true;
         thread = new Thread(this, "Game");
         thread.start();
         
     }
     
-    public void stopGame(){
+    public synchronized void stopGame(){
         running = false;
         thread.interrupt();
     }
     
-    public void render(){
-        
-    }
+   
     
 }
