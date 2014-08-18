@@ -7,10 +7,14 @@
 
 package core;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Jacob
  */
-public class GamePlay {
+public class GamePlay extends JPanel{
+    
+    
     
 }
