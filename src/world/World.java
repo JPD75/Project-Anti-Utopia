@@ -17,12 +17,7 @@ public class World {
     
     public World(int l, int w){
         chunks = new Chunk[(l / 16) * (w / 16)];
-        int y = -1;
-        for(int i = 0; i < chunks.length; i ++){
-            int x = (i % (l / 16)) * 16;
-            if(x == 0) y += 16;
-            chunks[i] = new Chunk(x, y);
-        }
+        
     }
     
     public void generateMineshaft(int x, int y, int l, boolean r){

@@ -15,16 +15,19 @@ import data.Tiles;
 
 public class Chunk {
    
-    public int[] data = new int[16 * 16];
-    public int[] damage = new int[16 * 16];
+    public int[][] data = new int[16][16];
+    public int[][] damage = new int[16][16];
     
     int x;
     int y;
     
     public Chunk(int x, int y){
-        for(int i = 0; i < data.length; i ++){
-            data[i] = Tiles.STONE.ordinal();
+        for(int cy = 0; cy < 16; cy ++){
+            for(int cx = 0; cx < 16; cx ++){
+            data[cx][cy] = Tiles.STONE.ordinal();
         }
+        }
+        
     }
     
 }
