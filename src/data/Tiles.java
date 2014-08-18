@@ -13,14 +13,14 @@ import java.awt.image.BufferedImage;
  */
 public enum Tiles {
 
-    STONE(0, 0, true, 100), DIRT(64, 0, true, 50), WOOD(128, 0, true, 75), AIR(192, 0, false, 0),
+    STONE(0, 0, true, 100), DIRT(1, 0, true, 50), WOOD(2, 0, true, 75), AIR(3, 0, false, 0),
     
-    COAL(0, 64, true, 125), IRON(64, 64, true, 150), URANIUM(128, 64, true, 200), TEMPLEBRICK(192, 64, true, 300),
+    COAL_ORE(0, 1, true, 125), IRON_ORE(1, 1, true, 150), URANIUM_ORE(2, 1, true, 200), TEMPLEBRICK(3, 1, true, 300),
     
-    CHEST(0, 128, true, 75), TORCH(64, 128, false, 1), FIRE1(128, 128, false, 20), FIRE2(192, 128, false, 20);
+    CHEST(0, 2, true, 75), TORCH(1, 2, false, 1), FIRE1(2, 2, false, 20), FIRE2(3, 2, false, 20);
     
-    public BufferedImage blockImage;
-    private BufferedImage blockSpriteSheet = (new assets.LoadArt()).createBufferedImage("blocks.png");
+    public BufferedImage image;
+    private BufferedImage spriteSheet = (new assets.LoadArt()).createBufferedImage("blocks.png");
     
     public boolean solid;
     public int durability;
@@ -30,7 +30,7 @@ public enum Tiles {
         this.solid = solid;
         this.durability = durability;
         
-        blockImage = blockSpriteSheet.getSubimage(x, y, 64, 64);
+        image = spriteSheet.getSubimage(x * 64, y * 64, 64, 64);
         
     }
 }

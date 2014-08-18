@@ -13,14 +13,14 @@ import java.awt.image.BufferedImage;
  */
 public enum Entities {
 
-    SNAKE(0, 0, 25, 5, 25), BAT1(64, 0, 25, 5, 25), BAT2(128, 0, 25, 5, 25), SPIDER(192, 0, 35, 7, 20),
+    SNAKE(0, 0, 25, 5, 25), BAT1(1, 0, 25, 5, 25), BAT2(2, 0, 25, 5, 25), SPIDER(3, 0, 35, 7, 20),
     
-    GOBLIN(0, 64, 75, 12, 14), TROLL(64, 64, 150, 20, 9), DRAGON1(128, 64, 500, 100, 1), DRAGON2(192, 64, 500, 100, 1),
+    GOBLIN(0, 1, 75, 12, 14), TROLL(1, 1, 150, 20, 9), DRAGON1(2, 1, 500, 100, 1), DRAGON2(3, 1, 500, 100, 1),
     
-    GHOST(0, 192, 190, 40, 4), BEHEMOTH(64, 192, 270, 70, 2), DRAGON3(128, 128, 500, 100, 1), DRAGON4(192, 128, 500, 100, 1);
+    GHOST(0, 2, 190, 40, 4), BEHEMOTH(1, 2, 270, 70, 2), DRAGON3(2, 2, 500, 100, 1), DRAGON4(3, 2, 500, 100, 1);
     
-    public BufferedImage entityImage;
-    private BufferedImage entitySpriteSheet = (new assets.LoadArt()).createBufferedImage("entities.png");
+    public BufferedImage image;
+    private BufferedImage spriteSheet = (new assets.LoadArt()).createBufferedImage("entities.png");
     
     public int health;
     public int damage;
@@ -32,6 +32,6 @@ public enum Entities {
         this.damage = damage;
         this.spawn = spawn;
         
-        entityImage = entitySpriteSheet.getSubimage(x, y, 64, 64);
+        image = spriteSheet.getSubimage(x * 64, y * 64, 64, 64);
     }
 }
