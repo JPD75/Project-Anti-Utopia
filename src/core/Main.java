@@ -47,15 +47,13 @@ public class Main extends JFrame {
         }
         
         Graphics g = bs.getDrawGraphics();
-        
-        int y = -1;
-        
-        for(int i = 0; i < w.chunks.length; i ++){
-            int x = (i % (64 / 16)) * 16;
-            if(x == 0) y += 16;
-           
-            g.drawImage(Tiles.STONE.image, x * 64, y * 64, null);
-        }
+                  
+       for(int y = 0; y < w.width; y++){
+           for(int x = 0; x < w.length; x++){
+               Tiles tile = w.getBlock(x, y);
+               g.drawImage(tile.image, x * 64, y * 64, null);
+           }
+       }
         
         g.dispose();
         bs.show();
