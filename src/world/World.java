@@ -27,6 +27,15 @@ public class World {
                 chunks[x + y * (l / Chunk.size)] = new Chunk(x * Chunk.size, y * Chunk.size);
             }
         }
+        setBlock(Tiles.URANIUM_ORE,1,1);
+        setBlock(Tiles.URANIUM_ORE,3,1);
+        setBlock(Tiles.URANIUM_ORE,2,2);
+        setBlock(Tiles.URANIUM_ORE,0,3);
+        setBlock(Tiles.URANIUM_ORE,1,4);
+        setBlock(Tiles.URANIUM_ORE,2,4);
+        setBlock(Tiles.URANIUM_ORE,3,4);
+        setBlock(Tiles.URANIUM_ORE,4,3);
+        generateSquare(5,5,3,Tiles.AIR);
         
     }
     
@@ -71,5 +80,18 @@ public class World {
         
     }
     
+    public void generateCave(int x, int y){
+        
+    }
+    
+    public void generateSquare(int x, int y, int size, Tiles tile){
+    
+        for(int rows = x; rows < x + size; x++){
+            for(int cols = y; cols < y + size; cols ++){
+                setBlock(tile, rows, cols);
+            }
+        }
+        
+    }
     
 }
