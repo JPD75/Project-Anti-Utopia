@@ -23,7 +23,7 @@ public class Main extends JFrame {
         w = new World(64, 64);
         setTitle("Project Anti-Utopia");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1280,720);
+        setSize(1920,1080);
         add(d);
         setResizable(false);
         setLocationRelativeTo(null);

@@ -26,8 +26,10 @@ public class World {
             }
         }
 
-        generateSquare(0, 0, 5, Tiles.AIR);
-
+        //generateSquare(0, 0, 5, Tiles.AIR);
+        
+        generateDragonTemple(0, 0);
+        
         setBlock(Tiles.URANIUM_ORE, 1, 1);
         setBlock(Tiles.URANIUM_ORE, 3, 1);
         setBlock(Tiles.URANIUM_ORE, 2, 2);
@@ -74,10 +76,26 @@ public class World {
 
     public void generateMineshaft(int x, int y, int l, boolean r) {
 
+        if (r) {
+
+        }
+        if (!r) {
+
+        }
+
     }
 
     public void generateDragonTemple(int x, int y) {
-
+        int dtSize = 50;
+        for (int rows = x; rows < x + dtSize; rows++) {
+            for (int cols = y; cols < y + dtSize; cols++) {
+                if (rows == 0 || rows == dtSize - 1 || cols == 0 || cols == dtSize - 1) {
+                    setBlock(Tiles.TEMPLEBRICK, rows, cols);
+                } else {
+                    setBlock(Tiles.AIR, rows, cols);
+                }
+            }
+        }
     }
 
     public void generateCave(int x, int y) {
