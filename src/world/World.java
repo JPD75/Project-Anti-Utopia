@@ -25,10 +25,14 @@ public class World {
                 chunks[x + y * (l / Chunk.size)] = new Chunk(x * Chunk.size, y * Chunk.size);
             }
         }
-
-        //generateSquare(0, 0, 5, Tiles.AIR);
+    /*
+        generateSquare(0, 0, 5, Tiles.AIR);
         
         generateDragonTemple(0, 0);
+        
+        generateMineshaft(2, 2, 7, true);
+        generateMineshaft(2, 6, 3, false);
+        
         
         setBlock(Tiles.URANIUM_ORE, 1, 1);
         setBlock(Tiles.URANIUM_ORE, 3, 1);
@@ -38,7 +42,7 @@ public class World {
         setBlock(Tiles.URANIUM_ORE, 2, 4);
         setBlock(Tiles.URANIUM_ORE, 3, 4);
         setBlock(Tiles.URANIUM_ORE, 4, 3);
-
+    */
     }
 
     public Tiles getBlock(int x, int y) {
@@ -75,12 +79,44 @@ public class World {
     }
 
     public void generateMineshaft(int x, int y, int l, boolean r) {
-
+        int lvl = 0;
         if (r) {
-
+            for(int cols = y; cols < y + 3; cols ++){
+                for(int rows = x; rows < x + l; rows ++){
+                    switch(lvl){
+                        case 0:
+                            setBlock(Tiles.WOOD, rows, cols);
+                            break;
+                        case 1:
+                            setBlock(Tiles.AIR, rows, cols);
+                            break;
+                        case 2:
+                            setBlock(Tiles.WOOD, rows, cols);
+                            break;
+                    }
+                }
+                lvl ++;
+            }
+            lvl = 0;
         }
         if (!r) {
-
+            for(int rows = x; rows < x + 3; rows ++){
+                for(int cols = y; cols < y + l; cols ++){
+                    switch(lvl){
+                        case 0:
+                            setBlock(Tiles.WOOD, rows, cols);
+                            break;
+                        case 1:
+                            setBlock(Tiles.AIR, rows, cols);
+                            break;
+                        case 2:
+                            setBlock(Tiles.WOOD, rows, cols);
+                            break;
+                    } 
+                }
+                lvl ++;
+            }
+            lvl = 0;
         }
 
     }
