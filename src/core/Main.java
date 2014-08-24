@@ -54,7 +54,11 @@ public class Main extends JFrame {
                g.drawImage(tile.image, x * 64, y * 64, null);
            }
        }
-        
+       
+       for(int i = 0; i < w.entity.size(); i ++){
+           g.drawImage(w.entity.get(i).image, w.entity.get(i).x * 64, w.entity.get(i).y * 64, null);
+       }
+       
         g.dispose();
         bs.show();
         

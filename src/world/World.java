@@ -5,7 +5,10 @@
  */
 package world;
 
+import data.Entities;
 import data.Tiles;
+import entity.Entity;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +17,7 @@ import data.Tiles;
 public class World {
 
     public Chunk[] chunks;
+    public ArrayList<Entity> entity = new ArrayList<>();
     public int length, width;
 
     public World(int l, int w) {
@@ -25,9 +29,9 @@ public class World {
                 chunks[x + y * (l / Chunk.size)] = new Chunk(x * Chunk.size, y * Chunk.size);
             }
         }
-    /*
-        generateSquare(0, 0, 5, Tiles.AIR);
-        
+    
+        generateSquare(0,0,5, Tiles.AIR);
+        /*
         generateDragonTemple(0, 0);
         
         generateMineshaft(2, 2, 7, true);
@@ -43,6 +47,9 @@ public class World {
         setBlock(Tiles.URANIUM_ORE, 3, 4);
         setBlock(Tiles.URANIUM_ORE, 4, 3);
     */
+        
+        new Entity(Entities.BEHEMOTH, this);
+        
     }
 
     public Tiles getBlock(int x, int y) {
@@ -99,7 +106,7 @@ public class World {
             }
             lvl = 0;
         }
-        if (!r) {
+        else if (!r) {
             for(int rows = x; rows < x + 3; rows ++){
                 for(int cols = y; cols < y + l; cols ++){
                     switch(lvl){
@@ -123,15 +130,8 @@ public class World {
 
     public void generateDragonTemple(int x, int y) {
         int dtSize = 50;
-        for (int rows = x; rows < x + dtSize; rows++) {
-            for (int cols = y; cols < y + dtSize; cols++) {
-                if (rows == 0 || rows == dtSize - 1 || cols == 0 || cols == dtSize - 1) {
-                    setBlock(Tiles.TEMPLEBRICK, rows, cols);
-                } else {
-                    setBlock(Tiles.AIR, rows, cols);
-                }
-            }
-        }
+        generateSquare(x, y, dtSize, Tiles.TEMPLEBRICK);
+        generateSquare(x + 1, y + 1, dtSize - 2, Tiles.AIR);
     }
 
     public void generateCave(int x, int y) {
