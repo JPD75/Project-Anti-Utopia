@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
-import core.Main;
-import data.Entities;
+import data.Armor;
 import data.Tiles;
-
 import java.awt.image.BufferedImage;
 import java.util.Random;
 import world.World;
@@ -18,35 +15,36 @@ import world.World;
  *
  * @author Jacob
  */
+public class Armour {
 
-public class Entity {
-    
-    public BufferedImage image;
+    public BufferedImage image, image1, image2, image3;
     public int x, y;
-    public int health, damage;
-    public double spawn;
-    
-    public Entity(Entities e, World w){
+    public int dir, material, article;
+
+    public Armour(Armor a, World w) {
+
+        image = a.image;
         
-        image = e.image;
-        health = e.health;
-        damage = e.damage;
-        spawn = e.spawn;
-        
+        dir = a.dir;
+        material = a.material;
+        article = a.article;
+
         spawn(w);
-        
+
     }
-    
-    public void spawn(World w){
-        
+
+    public void spawn(World w) {
+
         Random r = new Random();
         Tiles t = Tiles.STONE;
-        while(t.solid){
+        while (t.solid) {
             x = r.nextInt(w.length * 2) % w.length;
             y = r.nextInt(w.width * 2) % w.width;
             t = w.getBlock(x, y);
         }
-        w.entity.add(this);
+        x = Player.x;
+        y = Player.y;
+            w.armor.add(this);
     }
-    
+
 }

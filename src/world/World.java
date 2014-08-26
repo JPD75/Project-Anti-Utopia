@@ -5,9 +5,13 @@
  */
 package world;
 
+import data.Armor;
 import data.Entities;
+import data.Players;
 import data.Tiles;
+import entity.Armour;
 import entity.Entity;
+import entity.Player;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +22,8 @@ public class World {
 
     public Chunk[] chunks;
     public ArrayList<Entity> entity = new ArrayList<>();
+    public ArrayList<Player> player = new ArrayList<>();
+    public ArrayList<Armour> armor = new ArrayList<>();
     public int length, width;
 
     public World(int l, int w) {
@@ -30,7 +36,7 @@ public class World {
             }
         }
     
-        generateSquare(0,0,5, Tiles.AIR);
+        generateMineshaft(5, 5, 10, true);
         /*
         generateDragonTemple(0, 0);
         
@@ -49,6 +55,12 @@ public class World {
     */
         
         new Entity(Entities.BEHEMOTH, this);
+        new Player(Players.UP, this);
+        
+        new Armour(Armor.IRON_HELMET_UP, this);
+        new Armour(Armor.IRON_TORSO_UP, this);
+        new Armour(Armor.IRON_PANTS_UP, this);
+        new Armour(Armor.IRON_BOOTS_UP, this);
         
     }
 

@@ -58,6 +58,12 @@ public class Main extends JFrame {
        for(int i = 0; i < w.entity.size(); i ++){
            g.drawImage(w.entity.get(i).image, w.entity.get(i).x * 64, w.entity.get(i).y * 64, null);
        }
+       for(int i = 0; i < w.player.size(); i ++){
+           g.drawImage(w.player.get(i).image, w.player.get(i).x * 64, w.player.get(i).y * 64, null);
+       }
+       for(int i = 0; i < w.armor.size(); i ++){
+           g.drawImage(w.armor.get(i).image, w.player.get(0).x * 64, w.player.get(0).y * 64, null);
+       }
        
         g.dispose();
         bs.show();
