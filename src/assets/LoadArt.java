@@ -18,7 +18,7 @@ public class LoadArt {
         if (imgURL != null) {
             ImageIcon ii = new ImageIcon(imgURL, "Image");
             Image i = ii.getImage();
-            i=i.getScaledInstance(sizeX, sizeY, Image.SCALE_SMOOTH);
+            i=i.getScaledInstance(sizeX * 4, sizeY * 4, Image.SCALE_SMOOTH);
             return i;
         } else {
             System.err.println("Couldn't find file: " + path);

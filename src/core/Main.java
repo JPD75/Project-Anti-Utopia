@@ -25,7 +25,7 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1920,1080);
         add(d);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
         d.startGame();

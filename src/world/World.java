@@ -13,6 +13,7 @@ import entity.Armour;
 import entity.Entity;
 import entity.Player;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -35,33 +36,14 @@ public class World {
                 chunks[x + y * (l / Chunk.size)] = new Chunk(x * Chunk.size, y * Chunk.size);
             }
         }
-    
-        generateMineshaft(5, 5, 10, true);
-        /*
-        generateDragonTemple(0, 0);
-        
-        generateMineshaft(2, 2, 7, true);
-        generateMineshaft(2, 6, 3, false);
+
+        //World Generation From Here:
         
         
-        setBlock(Tiles.URANIUM_ORE, 1, 1);
-        setBlock(Tiles.URANIUM_ORE, 3, 1);
-        setBlock(Tiles.URANIUM_ORE, 2, 2);
-        setBlock(Tiles.URANIUM_ORE, 0, 3);
-        setBlock(Tiles.URANIUM_ORE, 1, 4);
-        setBlock(Tiles.URANIUM_ORE, 2, 4);
-        setBlock(Tiles.URANIUM_ORE, 3, 4);
-        setBlock(Tiles.URANIUM_ORE, 4, 3);
-    */
         
-        new Entity(Entities.BEHEMOTH, this);
-        new Player(Players.UP, this);
         
-        new Armour(Armor.IRON_HELMET_UP, this);
-        new Armour(Armor.IRON_TORSO_UP, this);
-        new Armour(Armor.IRON_PANTS_UP, this);
-        new Armour(Armor.IRON_BOOTS_UP, this);
         
+        //To Here
     }
 
     public Tiles getBlock(int x, int y) {
@@ -100,9 +82,9 @@ public class World {
     public void generateMineshaft(int x, int y, int l, boolean r) {
         int lvl = 0;
         if (r) {
-            for(int cols = y; cols < y + 3; cols ++){
-                for(int rows = x; rows < x + l; rows ++){
-                    switch(lvl){
+            for (int cols = y; cols < y + 3; cols++) {
+                for (int rows = x; rows < x + l; rows++) {
+                    switch (lvl) {
                         case 0:
                             setBlock(Tiles.WOOD, rows, cols);
                             break;
@@ -114,14 +96,13 @@ public class World {
                             break;
                     }
                 }
-                lvl ++;
+                lvl++;
             }
             lvl = 0;
-        }
-        else if (!r) {
-            for(int rows = x; rows < x + 3; rows ++){
-                for(int cols = y; cols < y + l; cols ++){
-                    switch(lvl){
+        } else if (!r) {
+            for (int rows = x; rows < x + 3; rows++) {
+                for (int cols = y; cols < y + l; cols++) {
+                    switch (lvl) {
                         case 0:
                             setBlock(Tiles.WOOD, rows, cols);
                             break;
@@ -131,9 +112,9 @@ public class World {
                         case 2:
                             setBlock(Tiles.WOOD, rows, cols);
                             break;
-                    } 
+                    }
                 }
-                lvl ++;
+                lvl++;
             }
             lvl = 0;
         }
@@ -141,13 +122,35 @@ public class World {
     }
 
     public void generateDragonTemple(int x, int y) {
-        int dtSize = 50;
+        int dtSize = 24;
         generateSquare(x, y, dtSize, Tiles.TEMPLEBRICK);
         generateSquare(x + 1, y + 1, dtSize - 2, Tiles.AIR);
     }
 
     public void generateCave(int x, int y) {
-
+        
+        Random r = new Random();
+        
+        int squares = r.nextInt(10) + 5;
+        int[] xValues = new int[squares];
+        int[] yValues = new int[squares];
+        int[] size = new int[squares];
+        
+        
+        xValues[0] = x;
+        yValues[0] = y;
+        size[0] = r.nextInt(3) + 3;
+                
+        generateSquare(xValues[0], yValues[0], size[0], Tiles.AIR);
+        
+        for(int i = 1; i < squares; i ++){
+            
+            xValues[i] = r.nextInt(size[i - 1]) + xValues[i - 1];
+            yValues[i] = r.nextInt(size[i - 1]) + yValues[i - 1];
+            size[i] = r.nextInt(4) + 1;
+            
+            generateSquare(xValues[i], yValues[i], size[i], Tiles.AIR);
+        }
     }
 
     public void generateSquare(int x, int y, int size, Tiles tile) {
@@ -160,4 +163,53 @@ public class World {
 
     }
 
+    public void generateOres(int x, int y) {
+
+        Random r = new Random();
+        Tiles t;
+        int size;
+        int oreChance = r.nextInt(14);
+        int ore = 0;
+
+        if (oreChance == 0) {
+            ore = 6;
+        }
+        if (oreChance >= 1 && oreChance <= 3) {
+            ore = 5;
+        }
+        if (oreChance > 3 && oreChance <= 7) {
+            ore = 4;
+        }
+        if (oreChance > 7 && oreChance <= 14) {
+            ore = 1;
+        }
+
+        t = Tiles.values()[ore];
+
+        switch (ore) {
+            case 1:
+                size = 7;
+                break;
+            case 4:
+                size = 4;
+                break;
+            case 5:
+                size = 3;
+                break;
+            case 6:
+                size = 2;
+                break;
+            default:
+                size = 1;
+                break;
+        }
+
+        for (int i = x; i < size + x; i++) {
+            for (int j = y; j < size + y; j++) {
+                if (r.nextInt(100) > 35) {
+                    setBlock(t, i, j);
+                }
+            }
+        }
+    }
 }

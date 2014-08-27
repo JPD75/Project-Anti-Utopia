@@ -9,6 +9,9 @@ package entity;
 import core.Main;
 import data.Entities;
 import data.Tiles;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -47,6 +50,5 @@ public class Entity {
             t = w.getBlock(x, y);
         }
         w.entity.add(this);
-    }
-    
+    }    
 }

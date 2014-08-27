@@ -15,7 +15,7 @@ public enum Players {
 
     UP(0, 0, 0, 25, 5), RIGHT(1, 0, 1, 25, 5),
     
-    LEFT(0, 1, 2, 25, 5), DOWN(1, 1, 3, 25, 5);
+    DOWN(0, 1, 2, 25, 5), LEFT(1, 1, 3, 25, 5);
 
     public BufferedImage image;
     private BufferedImage spriteSheet = (new assets.LoadArt()).createBufferedImage("Player.png");
