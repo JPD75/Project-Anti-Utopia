@@ -39,7 +39,7 @@ public class World {
 
         //World Generation From Here:
         
-        
+        generateCave(5, 5);
         
         
         
@@ -147,7 +147,7 @@ public class World {
             
             xValues[i] = r.nextInt(size[i - 1]) + xValues[i - 1];
             yValues[i] = r.nextInt(size[i - 1]) + yValues[i - 1];
-            size[i] = r.nextInt(4) + 1;
+            size[i] = r.nextInt(4) + 2;
             
             generateSquare(xValues[i], yValues[i], size[i], Tiles.AIR);
         }
