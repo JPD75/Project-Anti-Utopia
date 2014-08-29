@@ -40,7 +40,7 @@ public class World {
         //World Generation From Here:
         
         
-        
+        generateCave(5, 5, 5);
         
         
         //To Here
@@ -48,6 +48,10 @@ public class World {
 
     public Tiles getBlock(int x, int y) {
 
+        if((x > length || x < 0) || (y > width || y < 0)){
+            return null;
+        }
+        
         int xChunk = x / Chunk.size;
         int yChunk = y / Chunk.size;
         int chunkRows = length / Chunk.size;
@@ -67,6 +71,10 @@ public class World {
 
     public void setBlock(Tiles block, int x, int y) {
 
+        if((x > length || x < 0) || (y > width || y < 0)){
+            return;
+        }
+        
         int xChunk = x / Chunk.size;
         int yChunk = y / Chunk.size;
         int chunkRows = length / Chunk.size;
@@ -127,19 +135,22 @@ public class World {
         generateSquare(x + 1, y + 1, dtSize - 2, Tiles.AIR);
     }
 
-    public void generateLongCave(int x, int y) {
+    public void generateCave(int x, int y, int reps) {
         
+        for(int i = 0; i < reps; i ++){
+            
+        }
         Random r = new Random();
         
-        int squares = r.nextInt(10) + 5;
+        int squares = r.nextInt(10) + 10;
         int[] xValues = new int[squares];
         int[] yValues = new int[squares];
         int[] size = new int[squares];
-        
+        int dirX = 0, dirY = 0;
         
         xValues[0] = x;
         yValues[0] = y;
-        size[0] = r.nextInt(3) + 3;
+        size[0] = r.nextInt(2) + 2;
                 
         generateSquare(xValues[0], yValues[0], size[0], Tiles.AIR);
         
@@ -149,50 +160,13 @@ public class World {
             yValues[i] = r.nextInt(size[i - 1]) + yValues[i - 1];
             size[i] = r.nextInt(4) + 2;
             
-            generateSquare(xValues[i], yValues[i], size[i], Tiles.AIR);
+            dirX = r.nextInt(4) - 2;
+            dirY = r.nextInt(2) - 1;
+            
+            generateSquare(xValues[i] + dirX, yValues[i] + dirY, size[i], Tiles.AIR);
         }
     }
-    public void generateOpenCave(int x, int y){
-        Random r = new Random();
-        int squares = r.nextInt(15) + 5;
-        int[] xValues = new int[squares];
-        int[] yValues = new int[squares];
-        int[] size = new int[squares];
-        int xMove = 0, yMove = 0;
-        
-        xValues[0] = x;
-        yValues[0] = y;
-        size[0] = r.nextInt(3) + 3;
-        
-        generateSquare(xValues[0], yValues[0], size[0], Tiles.AIR);
-        
-        for(int i = 1; i < squares; i ++){
-            xMove = r.nextInt(6) - 3;
-            yMove = r.nextInt(6) - 3;
-            size[i] = size[i - 1] + r.nextInt(4) - 2;
-            
-            if(size[i] > 15){
-                size[i] = 15;
-            }else if(size[i] < 5){
-                size[i] = 5;
-            }
-            
-            xValues[i] = xValues[i - 1] + xMove;
-            yValues[i] = yValues[i - 1] + yMove;
-            
-            //Take out when unlimited world
-            if(xValues[i] <= 0){
-                xValues[i] = 0;
-            }if(yValues[i] <= 0){
-                yValues[i] = 0;
-            }
-            
-            System.out.println("" + xValues[i] + " " + yValues[i] + " " + size[i]);
-            
-            generateSquare(xValues[i], yValues[i], size[i], Tiles.AIR);
-            
-        }
-    }
+      
 
     public void generateSquare(int x, int y, int size, Tiles tile) {
 
@@ -203,6 +177,7 @@ public class World {
         }
 
     }
+    
 
     public void generateOres(int x, int y) {
 

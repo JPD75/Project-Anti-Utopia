@@ -11,14 +11,14 @@ import java.awt.event.KeyListener;
  */
 public class Keyboard implements KeyListener{
     private final boolean[] keys = new boolean[1000];
-    private int[] keyn = new int[4];
+    private int[] keyn = {KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D};
     public boolean[] keyBind = new boolean[4];
     /**
      * Sets up a keyboard input listener
      * @param keybinds 
      */
-    public Keyboard(int[] keybinds){
-        keyn=keybinds;
+    public Keyboard(){
+        
         for(boolean k: keys){
             k=false;
         }
@@ -39,16 +39,16 @@ public class Keyboard implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         if(keyBind[0]){
-            Main.w.p.move(0, -1);
+            Main.offY --;
         }
         if(keyBind[1]){
-            Main.w.p.move(0, 1);
+            Main.offY ++;
         }
         if(keyBind[2]){
-            Main.w.p.move(1, 0);
+            Main.offX --;
         }
         if(keyBind[3]){
-            Main.w.p.move(-1, 0);
+            Main.offX ++;
         }
     }
     /**
