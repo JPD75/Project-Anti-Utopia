@@ -41,7 +41,8 @@ public class World {
         
         
         generateCave(5, 5, 5);
-        
+        spawnEntity(Entities.GOBLIN);
+        spawnPlayer(Players.UP, Armor.IRON_BOOTS_UP, Armor.IRON_HELMET_UP, Armor.IRON_PANTS_UP, Armor.IRON_TORSO_UP);
         
         //To Here
     }
@@ -227,5 +228,17 @@ public class World {
                 }
             }
         }
+    }
+    
+    public void spawnEntity(Entities e){
+        entity.add(new Entity( e, this ));
+    }
+    public void spawnPlayer(Players p, Armor a1, Armor a2, Armor a3, Armor a4){
+        player.add(new Player( p, this ));
+        armor.add(new Armour(a1 , this));
+        armor.add(new Armour(a2 , this));
+        armor.add(new Armour(a3 , this));
+        armor.add(new Armour(a4 , this));
+        
     }
 }
